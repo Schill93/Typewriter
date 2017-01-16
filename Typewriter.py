@@ -14,7 +14,7 @@ def read_file():
 
 def printChar(letterIn):
     letters=string.ascii_lowercase+'åäö'
-    Special=''
+    Special=' #'
     numbers='1234567890'
 
     code_numbers=['110100','111111','111010','111011',' 110101','110110', '111100','110010','111000','110111','111101','110011','111001','110000']
@@ -25,8 +25,12 @@ def printChar(letterIn):
     if letterIn.lower() in letters and letterIn.isupper():
 
         print('Versal')
+        controlServo(code_letters[letters.index(letterIn.lower())],1)  #Searches for the input in lowercase since that's the only one that exists.
+
     elif letterIn.lower() in letters:
+
         print('Gemener')
+        controlServo(code_letters[letters.index(letterIn.lower())], 0)
     elif letterIn in numbers:
         print('Number')
     elif letterIn in Special:
@@ -36,12 +40,27 @@ def printChar(letterIn):
 
 
 
+def controlServo(code, cap):
+
+    A=code[0]
+    B=code[1]
+    C=code[2]
+    D=code[3]
+    E=code[4]
+    F=code[5]
+
+    Shift=cap
+
+
+    #Code that sets servos to their proper position.
+
+
+
 def main():
 
     charList=read_file()
 
-    printChar('#')
-
+    printChar('A') #Sgould send each character to the printChar function. So add forloop to send letters one and one.
 
 
 if __name__ == "__main__":
