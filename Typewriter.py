@@ -2,6 +2,14 @@ import os
 from time import sleep
 import math
 import string
+#from Adafruit_PWM_Servo_Driver import PWM
+import time
+
+servoMin = 500  # Min pulse length out of 4096
+servoMax = 600 # Max pulse length out of 4096
+
+#servoMin and servoMax might have to change, and/or introduce more variables since not all servos need to move the same distance,
+#This will have to be sorted out when the hardware is in place.
 
 def read_file():
 
@@ -25,12 +33,12 @@ def printChar(letterIn):
     if letterIn.lower() in letters and letterIn.isupper():
 
         print('Versal')
-        controlServo(code_letters[letters.index(letterIn.lower())],1)  #Searches for the input in lowercase since that's the only one that exists.
+        controlServo(code_letters[letters.index(letterIn.lower())],True)  #Searches for the input in lowercase since that's the only one that exists.
 
     elif letterIn.lower() in letters:
 
         print('Gemener')
-        controlServo(code_letters[letters.index(letterIn.lower())], 0)
+        controlServo(code_letters[letters.index(letterIn.lower())], False)
     elif letterIn in numbers:
         print('Number')
     elif letterIn in Special:
@@ -38,21 +46,35 @@ def printChar(letterIn):
     else:
         print('Not valid')
 
+def setServoPulse(channel, pulse):
+  pulseLength = 1000000                   # 1,000,000 us per second
+  pulseLength /= 60                       # 60 Hz
 
+  pulseLength /= 4096                     # 12 bits of resolution
+
+  pulse *= 1000
+  pulse /= pulseLength
+  pwm.setPWM(channel, 0, pulse)
 
 def controlServo(code, cap):
 
-    A=code[0]
-    B=code[1]
-    C=code[2]
-    D=code[3]
-    E=code[4]
-    F=code[5]
 
-    Shift=cap
+    for x in range(0,6):
+        print(code[x])
+        #pwm.setPWM(x,0,servoMax)
 
 
-    #Code that sets servos to their proper position.
+    if cap==True:
+        #pwm.setPWM(10,0,servoMax)  #10 is placholder, replace with adress to pwm servo.
+
+
+    #pwm.setPWM(11,0,servoMax)   #10 is placeholder, replace with adress to strike servo.
+
+
+
+
+#Reset all servos to their original position and wait for the next Character.
+
 
 
 
@@ -60,7 +82,7 @@ def main():
 
     charList=read_file()
 
-    printChar('A') #Sgould send each character to the printChar function. So add forloop to send letters one and one.
+    printChar('A') #Should send each character to the printChar function. So add forloop to send letters one and one.
 
 
 if __name__ == "__main__":
