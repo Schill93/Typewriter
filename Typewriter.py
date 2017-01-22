@@ -5,8 +5,13 @@ import string
 #from Adafruit_PWM_Servo_Driver import PWM
 import time
 
-servoMin = 500  # Min pulse length out of 4096
-servoMax = 600 # Max pulse length out of 4096
+
+#siffrorna är till för att kalibrera vad nollläge och "aktivt" läge är på servon.
+servoMin=[100,100,100,100,100,100,450,600,100,100,100,100]
+servoMax=[550,550,550,550,100,100,550,500,100,100,100,100]
+servoEnter=800
+
+#600 är noll, 800 enter och 500 mellanslag
 
 #servoMin and servoMax might have to change, and/or introduce more variables since not all servos need to move the same distance,
 #This will have to be sorted out when the hardware is in place.
@@ -42,9 +47,17 @@ def printChar(letterIn):
     elif letterIn in numbers:
         print('Number')
     elif letterIn in Special:
+
+        if letterIn ==' ':
+            #pwm.setPWM(7, 0, servoMax[7]) #Sets servo that controls space to its "spaceValue"
+
+            print(' ')
+
         print('Special')
     else:
         print('Not valid')
+
+
 
 def setServoPulse(channel, pulse):
   pulseLength = 1000000                   # 1,000,000 us per second
@@ -59,9 +72,10 @@ def setServoPulse(channel, pulse):
 def controlServo(code, cap):
 
 
-    for x in range(0,6):
+    for x in range(0,6):  #Sets servos to their code.
         print(code[x])
-        #pwm.setPWM(x,0,servoMax)
+
+        #pwm.setPWM(x,0,servoMax[x])
 
 
     if cap==True:
@@ -70,10 +84,18 @@ def controlServo(code, cap):
 
     #pwm.setPWM(11,0,servoMax)   #10 is placeholder, replace with adress to strike servo.
 
+        print(' ')
 
 
 
-#Reset all servos to their original position and wait for the next Character.
+
+
+    for x in range (0,6):    #Resets servos to start position.
+        #pwm.setPWM(x,0,servoMax[x])
+
+
+        print('Test')
+
 
 
 
@@ -82,7 +104,7 @@ def main():
 
     charList=read_file()
 
-    printChar('A') #Should send each character to the printChar function. So add forloop to send letters one and one.
+    printChar(' ') #Should send each character to the printChar function. So add forloop to send letters one and one.
 
 
 if __name__ == "__main__":
