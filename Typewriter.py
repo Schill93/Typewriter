@@ -4,7 +4,7 @@ import os
 from time import sleep
 import math
 import string
-#from Adafruit_PWM_Servo_Driver import PWM
+from Adafruit_PWM_Servo_Driver import PWM
 import time
 
 
@@ -61,7 +61,7 @@ def printChar(letterIn):
         controlServo(code_numbers[Special.index(letterIn)], True)
 
     elif letterIn ==' ':
-        #pwm.setPWM(7, 0, servoMax[7]) #Sets servo that controls space to its "spaceValue"
+        pwm.setPWM(7, 0, servoMax[7]) #Sets servo that controls space to its "spaceValue"
 
         print('Space')
 
@@ -81,7 +81,7 @@ def setServoPulse(channel, pulse):
   pwm.setPWM(channel, 0, pulse)
 
 def controlServo(code, cap):
-    
+
     b=[]
 
     for  digit in str(code):
@@ -101,7 +101,7 @@ def controlServo(code, cap):
 
 
     if cap==True:
-        #pwm.setPWM(10,0,servoMax)  #10 is placholder, replace with adress to pwm servo.
+        pwm.setPWM(10,0,servoMax)  #10 is placholder, replace with adress to pwm servo.
 
 
         print('Cap')
