@@ -16,7 +16,7 @@ pwm = PWM(0x40)
 
 #siffrorna är till för att kalibrera vad nollläge och "aktivt" läge är på servon.
 servoMin=[340,440,280,350,340,340,400,570,100,100,100,100]
-servoMax=[590,380,330,300,395,280,500,450,100,100,100,100]
+servoMax=[390,380,330,300,395,280,500,450,100,100,100,100]
 servoEnter=800
 
 #600 är noll, 800 enter och 500 mellanslag
