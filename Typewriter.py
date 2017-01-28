@@ -10,8 +10,8 @@ import time
 
 
 #siffrorna är till för att kalibrera vad nollläge och "aktivt" läge är på servon.
-servoMin=[100,100,100,100,100,100,450,600,100,100,100,100]
-servoMax=[550,550,550,550,100,100,550,500,100,100,100,100]
+servoMin=[340,440,280,350,340,340,400,570,100,100,100,100]
+servoMax=[590,380,330,300,395,280,500,450,100,100,100,100]
 servoEnter=800
 
 #600 är noll, 800 enter och 500 mellanslag
@@ -30,31 +30,35 @@ def read_file():
 
 def printChar(letterIn):
     letters=string.ascii_lowercase+'åäö'
-    Special='/+=%?&()":'
+    Special='´+=%?&()":/'
     numbers='1234567890'
 
     code_numbers=['110100','111111','111010','111011',' 110101','110110', '111100','110010','111000','110111','111101','110011','111001','110000']
 
-    code_letters=['010011','100000','100011','100111','101100','001011','001111','100100','010010','001110','100010','100101','011111','101010','010101','000110','000010','010111','010100','100001','101011','011011','010000','101111','000100','010001','110001','000101','010110','001010']
+    code_letters=['010011','100000','100011','100111','101100','001011','001111','100100','010010','001110','100010','100101','011111','101010','010101','000110','000010','010111','010100','100001','101011','011011','010000','101111','000100','110001','000101','010110','001010']
 
-    code_special=['110100','111010','110101','110110','111000','110111','110011','110000','000011','011010']
+    code_numbers=['111111','111010','111011','110101','110110','110010','110111','110011','110000','110100']
+
+
 
     if letterIn.lower() in letters and letterIn.isupper():
 
-        print('Versal')
+
         controlServo(code_letters[letters.index(letterIn.lower())],True)  #Searches for the input in lowercase since that's the only one that exists.
 
     elif letterIn.lower() in letters:
 
-        print('Gemener')
+
         controlServo(code_letters[letters.index(letterIn.lower())], False)
     elif letterIn in numbers:
-        print('Number')
+
+        controlServo(code_numbers[numbers.index(letterIn)], False)
+
     elif letterIn in Special:
 
-        print('Special')
-        print(code_special[Special.index(letterIn)])
-        controlServo(code_special[Special.index(letterIn)], False)
+
+
+        controlServo(code_numbers[Special.index(letterIn)], True)
 
     elif letterIn ==' ':
         #pwm.setPWM(7, 0, servoMax[7]) #Sets servo that controls space to its "spaceValue"
@@ -77,32 +81,50 @@ def setServoPulse(channel, pulse):
   pwm.setPWM(channel, 0, pulse)
 
 def controlServo(code, cap):
+    
+    b=[]
+
+    for  digit in str(code):
+        b.append(int(digit))
+
+
 
 
     for x in range(0,6):  #Sets servos to their code.
-        print(code[x])
+        #print(code[x])
 
-        #pwm.setPWM(x,0,servoMax[x])
+        if b[x] == 1:
+            print(x)
+            pwm.setPWM(x,0,servoMax[x])
+
+
 
 
     if cap==True:
         #pwm.setPWM(10,0,servoMax)  #10 is placholder, replace with adress to pwm servo.
 
 
-    #pwm.setPWM(11,0,servoMax)   #10 is placeholder, replace with adress to strike servo.
-
-        print(' ')
+        print('Cap')
 
 
+    strike()
 
 
 
     for x in range (0,6):    #Resets servos to start position.
-        #pwm.setPWM(x,0,servoMin[x])
+        pwm.setPWM(x,0,servoMin[x])
+        time.sleep(0.1)
 
 
-        print('Reset')
+        #print('Reset')
 
+
+    time.sleep(1)
+
+def strike():
+
+    print('Strike')
+    time.sleep(1)
 
 
 
@@ -111,9 +133,12 @@ def main():
 
     charList=read_file()
 
+    while True:
+
+        temp=input("Siffra \n")
 
 
-    printChar('"') #Should send each character to the printChar function. So add forloop to send letters one and one.
+        printChar(temp) #Should send each character to the printChar function. So add forloop to send letters one and one.
 
 
 if __name__ == "__main__":
