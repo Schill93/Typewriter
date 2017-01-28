@@ -4,8 +4,13 @@ import os
 from time import sleep
 import math
 import string
-from Adafruit_PWM_Servo_Driver import PWM
+
 import time
+
+from Adafruit_PWM_Servo_Driver import PWM
+
+
+pwm = PWM(0x40)
 
 
 
