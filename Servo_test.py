@@ -30,5 +30,9 @@ while (True):
   # Change speed of continuous servo on channel O
   a=input('Skriv siffra')
   pwm.setPWM(0, 0, a)
+  pwm.setPWM(1, 0, a)
+  pwm.setPWM(2, 0, a)
+  pwm.setPWM(3, 0, a)
+
   time.sleep(1)
   

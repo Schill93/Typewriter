@@ -27,13 +27,14 @@ def read_file():
 
 def printChar(letterIn):
     letters=string.ascii_lowercase+'åäö'
-    Special=' #'
+    Special='/+=%?&()":'
     numbers='1234567890'
 
     code_numbers=['110100','111111','111010','111011',' 110101','110110', '111100','110010','111000','110111','111101','110011','111001','110000']
 
     code_letters=['010011','100000','100011','100111','101100','001011','001111','100100','010010','001110','100010','100101','011111','101010','010101','000110','000010','010111','010100','100001','101011','011011','010000','101111','000100','010001','110001','000101','010110','001010']
 
+    code_special=['110100','111010','110101','110110','111000','110111','110011','110000','000011','011010']
 
     if letterIn.lower() in letters and letterIn.isupper():
 
@@ -48,12 +49,15 @@ def printChar(letterIn):
         print('Number')
     elif letterIn in Special:
 
-        if letterIn ==' ':
-            #pwm.setPWM(7, 0, servoMax[7]) #Sets servo that controls space to its "spaceValue"
-
-            print(' ')
-
         print('Special')
+        print(code_special[Special.index(letterIn)])
+        controlServo(code_special[Special.index(letterIn)], False)
+
+    elif letterIn ==' ':
+        #pwm.setPWM(7, 0, servoMax[7]) #Sets servo that controls space to its "spaceValue"
+
+        print('Space')
+
     else:
         print('Not valid')
 
@@ -91,10 +95,10 @@ def controlServo(code, cap):
 
 
     for x in range (0,6):    #Resets servos to start position.
-        #pwm.setPWM(x,0,servoMax[x])
+        #pwm.setPWM(x,0,servoMin[x])
 
 
-        print('Test')
+        print('Reset')
 
 
 
@@ -104,7 +108,9 @@ def main():
 
     charList=read_file()
 
-    printChar(' ') #Should send each character to the printChar function. So add forloop to send letters one and one.
+
+
+    printChar('"') #Should send each character to the printChar function. So add forloop to send letters one and one.
 
 
 if __name__ == "__main__":
