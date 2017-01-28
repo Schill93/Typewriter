@@ -1,9 +1,12 @@
+#coding=utf-8
+
 import os
 from time import sleep
 import math
 import string
 #from Adafruit_PWM_Servo_Driver import PWM
 import time
+
 
 
 #siffrorna är till för att kalibrera vad nollläge och "aktivt" läge är på servon.
