@@ -118,7 +118,7 @@ def controlServo(code, cap):
 
     for x in range (0,6):    #Resets servos to start position.
         pwm.setPWM(x,0,servoMin[x])
-        time.sleep(0.1)
+
 
 
         #print('Reset')
@@ -129,7 +129,13 @@ def controlServo(code, cap):
 def strike():
 
     print('Strike')
-    time.sleep(1)
+    time.sleep(0.1)
+
+    pwm.setPWM(x, 0, 330)
+    pwm.setPWM(x, 0, 320)
+
+
+    #Values
 
 
 
@@ -140,7 +146,7 @@ def main():
 
     while True:
 
-        temp=input("Siffra \n")
+        temp=raw_input("Siffra \n")
 
 
         printChar(temp) #Should send each character to the printChar function. So add forloop to send letters one and one.
