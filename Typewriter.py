@@ -15,12 +15,12 @@ pwm = PWM(0x40)
 
 
 #siffrorna är till för att kalibrera vad nollläge och "aktivt" läge är på servon.
-servoMin=[310,480,240,360,310,340,370,540,100,100,100,100]
-servoMax=[335,460,270,320,345,300,440,490,100,100,100,100]
+servoMin=[300,480,240,360,310,340,370,540,100,100,100,100]
+servoMax=[320,450,260,335,330,310,440,490,100,100,100,100]
 servoEnter=640
 
 strikeMin=370
-strikeMax=350
+strikeMax=346
 
 #600 är noll, 800 enter och 500 mellanslag
 
@@ -104,7 +104,7 @@ def controlServo(code, cap):
         if b[x] == 1:
             print(x)
             pwm.setPWM(x,0,servoMax[x])
-
+	    time.sleep(0.1)
 
 
 
@@ -132,11 +132,11 @@ def controlServo(code, cap):
 def strike():
 
     print('Strike')
-    time.sleep(0.1)
+    time.sleep(0.2)
 
-    pwm.setPWM(8, 0, strikeMin)
-    time.sleep(0.1)
     pwm.setPWM(8, 0, strikeMax)
+    time.sleep(0.05)
+    pwm.setPWM(8, 0, strikeMin)
 
 
     #Values
